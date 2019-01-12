@@ -1,5 +1,5 @@
 CREATE TABLE "tasks"
 (
     "id" INTEGER,
-    "todo-item" VARCHAR(80)
+    "todo_item" VARCHAR(80)
 ); 
