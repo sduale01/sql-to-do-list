@@ -12,3 +12,4 @@
 ## Stretch Mode
 
 - [x] Bootstrap is added to the front end
+- [x] Completed tasks are brought to the bottom of the page and the remaining             tasks left to complete are brought to the top of the list.
