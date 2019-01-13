@@ -77,7 +77,7 @@ function deleteTask() {
             title: "Are you sure?",
             text: "Once deleted, you will not be able to recover this task!",
             icon: "warning",
-            buttons: true,
+            buttons: [true, "Delete"],
             dangerMode: true,
         })
         .then((willDelete) => {
@@ -88,11 +88,11 @@ function deleteTask() {
                 }).then((response) => {
                     getTasksOnServer();
                 })
-                swal("Poof! Task has been deleted!", {
+                swal("Poof! task has been deleted !", {
                     icon: "success",
                 });
             } else {
-                swal("Your imaginary file is safe!");
+                swal("Your task is safe!");
             }
         });
 
