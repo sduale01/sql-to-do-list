@@ -1,5 +1,5 @@
-CREATE TABLE "tasks"
-(
-    "id" INTEGER,
-    "todo_item" VARCHAR(80)
-); 
+CREATE TABLE "tasks" (
+	"id" SERIAL PRIMARY KEY,
+	"todo_item" VARCHAR (80),
+	"task_completed" BOOL
+	); 

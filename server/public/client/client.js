@@ -13,15 +13,20 @@ function submitItem() {
     
     // Package the data
     let itemToSend = {
-        item: $('#todo-item').val(),
-        taskCompleted: $('#task-completed').val()
+        todo_item: $('#todo-item').val(),
+        task_completed: $('#task-completed').val()
     }
+    console.log('this will be posted to the server: ', itemToSend);
+    
+
 
     $.ajax({
         method: 'POST',
         url: '/task',
         data: itemToSend
     }).then((response) => {
+        console.log(response);
+        
         getTasksOnServer();
     })
 }
@@ -31,22 +36,32 @@ function getTasksOnServer() {
         method: 'GET',
         url: '/task'
     }).then((response) => {
-        // console.log(response);
+        console.log(response);
         //to avoid table duplication
         $('#table-body').empty();
 
         let tasks = response
         for (let task of tasks) {
-            $('#table-body').append(`<tr>
+            if (task.task_completed) {
+               $('#table-body').append(`<tr>
+                                        <td>${task.todo_item}</td>
+                                        <td>${task.task_completed}</td>
+                                        <td><div></div></td>
+                                        <td><button class="delete-btn" data-deleteid="${task.id}">Delete</button></td>
+                                    </tr>`)
+            }else {
+                $('#table-body').append(`<tr>
                                         <td>${task.todo_item}</td>
                                         <td>${task.task_completed}</td>
                                         <td><button class="complete-btn">Completed</button></td>
                                         <td><button class="delete-btn" data-deleteid="${task.id}">Delete</button></td>
                                     </tr>`)
+            }
+            
             
         }
         
-    })
+    });
 }
 
 function deleteTask() {
