@@ -16,7 +16,7 @@ const pool = new Pool({
 
 // gets what is on table and sends to client
 taskRouter.get('/', (req,res) => {
-    const queryText = 'SELECT * FROM "tasks" ORDER BY "id" ASC;'
+    const queryText = 'SELECT * FROM "tasks" ORDER BY "task_completed" ASC, "id" ASC;'
     pool.query(queryText).then((result) => {
         res.send(result.rows);
         // console.log(result.rows);
