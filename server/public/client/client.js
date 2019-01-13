@@ -12,6 +12,7 @@ $(document).ready(function () {
     $('#table-body').on('click', '.complete-btn', updateTask);
 })
 
+// posts new task to database and updates table
 function submitItem() {
     console.log('submit clicked');
     
@@ -20,9 +21,6 @@ function submitItem() {
         todo_item: $('#todo-item').val(),
         task_completed: $('#task-completed').val()
     }
-    console.log('this will be posted to the server: ', itemToSend);
-    
-
 
     $.ajax({
         method: 'POST',
@@ -35,6 +33,7 @@ function submitItem() {
     })
 }
 
+// Grabs databse table and appends it to page
 function getTasksOnServer() {
     $.ajax({
         method: 'GET',
@@ -68,8 +67,8 @@ function getTasksOnServer() {
     });
 }
 
+// deletes a task
 function deleteTask() {
-    // console.log($(this).data('deleteid'));
     const deleteId = $(this).data('deleteid');
 
     $.ajax({
@@ -81,7 +80,7 @@ function deleteTask() {
     
 }
 
-// Sets tast completed to true
+// Sets task completed to true
 function updateTask() {
     const updateId = $(this).data('updateid');
     

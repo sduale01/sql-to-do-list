@@ -14,7 +14,7 @@ const pool = new Pool({
     idleTimeoutMillis: 10000
 });
 
-
+// gets what is on table and sends to client
 taskRouter.get('/', (req,res) => {
     const queryText = 'SELECT * FROM "tasks" ORDER BY "id" ASC;'
     pool.query(queryText).then((result) => {
@@ -27,7 +27,7 @@ taskRouter.get('/', (req,res) => {
     })
 })
 
-
+// posts to db talbe
 taskRouter.post('/', (req,res) => {
     
     const queryText = `INSERT INTO "tasks" ("todo_item", "task_completed") 
@@ -41,6 +41,7 @@ taskRouter.post('/', (req,res) => {
     })
 })
 
+// deletes specified row from table
 taskRouter.delete('/:id', (req,res) => {
     const queryText = 'DELETE FROM "tasks" WHERE "id" = $1'
     pool.query(queryText, [req.params.id]).then((result) => {
@@ -51,6 +52,7 @@ taskRouter.delete('/:id', (req,res) => {
     })
 })
 
+// updates specified row
 taskRouter.put('/update/:id', (req,res) => {
     const queryText = `UPDATE "tasks" SET "task_completed" = 'true'
                        WHERE "id" = $1;`;
