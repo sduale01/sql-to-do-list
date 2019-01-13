@@ -18,7 +18,7 @@ $(document).ready(function () {
 // posts new task to database and updates table
 function submitItem() {
     console.log('submit clicked');
-    
+
     // Package the data
     let itemToSend = {
         todo_item: $('#todo-item').val(),
@@ -31,7 +31,7 @@ function submitItem() {
         data: itemToSend
     }).then((response) => {
         console.log(response);
-        
+
         getTasksOnServer();
     })
 }
@@ -49,13 +49,13 @@ function getTasksOnServer() {
         let tasks = response
         for (let task of tasks) {
             if (task.task_completed) {
-               $('#table-body').append(`<tr class="tastTableRow">
+                $('#table-body').append(`<tr class="tastTableRow">
                                         <td>${task.todo_item}</td>
                                         <td>${task.task_completed}</td>
                                         <td align="center"><input type="checkbox" checked disabled></input</td>
                                         <td><button class="btn btn-danger delete-btn" data-deleteid="${task.id}">Delete</button></td>
                                     </tr>`)
-            }else {
+            } else {
                 $('#table-body').append(`<tr>
                                         <td>${task.todo_item}</td>
                                         <td>${task.task_completed}</td>
@@ -63,34 +63,50 @@ function getTasksOnServer() {
                                         <td><button class="btn btn-secondary delete-btn" data-deleteid="${task.id}">Delete</button></td>
                                     </tr>`)
             }
-            
-            
+
+
         }
-        
+
     });
 }
 
 // deletes a task
 function deleteTask() {
     const deleteId = $(this).data('deleteid');
+    swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this task!",
+            icon: "warning",
+            buttons: [true, "Delete"],
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    method: 'DELETE',
+                    url: `/task/${deleteId}`
+                }).then((response) => {
+                    getTasksOnServer();
+                })
+                swal("Poof! task has been deleted !", {
+                    icon: "success",
+                });
+            } else {
+                swal("Your task is safe!");
+            }
+        });
 
-    $.ajax({
-        method: 'DELETE',
-        url: `/task/${deleteId}`
-    }).then((response) => {
-        getTasksOnServer();
-    })
-    
+
 }
 
 // Sets task completed to true
 function updateTask() {
     const updateId = $(this).data('updateid');
     console.log(updateId);
-    
-    
-    
-console.log(updateId);
+
+
+
+    console.log(updateId);
 
     $.ajax({
         method: 'PUT',

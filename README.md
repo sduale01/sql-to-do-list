@@ -9,7 +9,8 @@
 - [x] Whether or not a Task is complete is also stored in the database.
 - [x] Deleting a Task removes it both from the front end as well as the Database.
 
-## Stretch Mode
 
+## Stretch Mode
 - [x] Bootstrap is added to the front end
 - [x] Completed tasks are brought to the bottom of the page and the remaining             tasks left to complete are brought to the top of the list.
+- [x] When deleting a task, 'are you sure: yes / no' option will pop up.
