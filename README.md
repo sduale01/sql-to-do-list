@@ -11,4 +11,4 @@
 
 ## Stretch Mode
 
-- [] Bootstrap is added to the front end
+- [x Bootstrap is added to the front end
