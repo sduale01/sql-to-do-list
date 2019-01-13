@@ -3,15 +3,18 @@ console.log('js working');
 $(document).ready(function () {
     console.log('jq is working');
     $('#submit-btn').on('click', submitItem);
+    // Prevents full page reload when new task is added
+    $('#submit-btn').on('click', ((event) => {
+        event.preventDefault();
+    }));
     getTasksOnServer();
 
     // will delete a row
     $('#table-body').on('click', '.delete-btn', deleteTask);
 
     //will update a task to turn its compeletion to: true
-    $('#table-body').on('click', '.complete-btn', updateTask);
+    $('#table-body').on('click', '.complete-checkbox', updateTask);
 })
-
 // posts new task to database and updates table
 function submitItem() {
     console.log('submit clicked');
@@ -49,15 +52,15 @@ function getTasksOnServer() {
                $('#table-body').append(`<tr class="tastTableRow">
                                         <td>${task.todo_item}</td>
                                         <td>${task.task_completed}</td>
-                                        <td><div></div></td>
-                                        <td><button class="delete-btn" data-deleteid="${task.id}">Delete</button></td>
+                                        <td align="center"><input type="checkbox" checked disabled></input</td>
+                                        <td><button class="btn btn-danger delete-btn" data-deleteid="${task.id}">Delete</button></td>
                                     </tr>`)
             }else {
                 $('#table-body').append(`<tr>
                                         <td>${task.todo_item}</td>
                                         <td>${task.task_completed}</td>
-                                        <td><button class="complete-btn" data-updateid="${task.id}">Completed</button></td>
-                                        <td><button class="delete-btn" data-deleteid="${task.id}">Delete</button></td>
+                                        <td align="center"><input class="complete-checkbox" data-updateid="${task.id}" type="checkbox"></input></td>
+                                        <td><button class="btn btn-secondary delete-btn" data-deleteid="${task.id}">Delete</button></td>
                                     </tr>`)
             }
             
@@ -83,6 +86,8 @@ function deleteTask() {
 // Sets task completed to true
 function updateTask() {
     const updateId = $(this).data('updateid');
+    console.log(updateId);
+    
     
     
 console.log(updateId);

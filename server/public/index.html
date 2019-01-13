@@ -7,30 +7,43 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="vendors/jquery-compressed-file.js"></script>
     <script src="client/client.js"></script>
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
     <link rel="stylesheet" href="styles/styles.css">
     <title>To Do List</title>
 </head>
 
-<body>
+<body id="body">
     <div class="container">
-        <h1>TO DO LIST</h1>
-        <input type="text" id="todo-item" value="mangos" placeholder="Task name">
-        <input type="text" id="task-completed" placeholder="Completed? true/false">
-        <button id="submit-btn">submit</button>
+        <h1 class="display-1">TO DO LIST</h1>
+        <form>
+            <div class="form-group">
+                <label for="exampleInputTask">Task</label>
+                <input type="text" class="form-control" id="todo-item" value="" placeholder="Task name">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputCompleted">Is Task Completed?</label>
+                <input type="text" class="form-control" id="task-completed" placeholder="Completed? true/false">
+                <small class="form-text text-muted">Enter true or false</small>
+            </div>
+            <button class="btn btn-primary" id="submit-btn">Submit</button>
+        </form>
+        <!-- table tags -->
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>TASK</th>
+                        <th>TASK COMPLETED</th>
+                        <th>COMPLETE</th>
+                        <th>DELETE</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
 
-        <table>
-            <thead>
-                <tr>
-                    <td>TASK</td>
-                    <td>TASK COMPLETED</td>
-                    <td>COMPLETE</td>
-                    <td>DELETE</td>
-                </tr>
-            <tbody id="table-body">
+                </tbody>
 
-            </tbody>
-            </thead>
-        </table>
+            </table>
+        </div>
     </div>
 
 </body>

@@ -8,3 +8,7 @@
 - [x] When a Task is complete, its visual representation changes on the front end.
 - [x] Whether or not a Task is complete is also stored in the database.
 - [x] Deleting a Task removes it both from the front end as well as the Database.
+
+## Stretch Mode
+
+- [x Bootstrap is added to the front end
