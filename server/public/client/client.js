@@ -5,7 +5,11 @@ $(document).ready(function () {
     $('#submit-btn').on('click', submitItem);
     getTasksOnServer();
 
+    // will delete a row
     $('#table-body').on('click', '.delete-btn', deleteTask);
+
+    //will update a task to turn its compeletion to: true
+    $('#table-body').on('click', '.complete-btn', updateTask);
 })
 
 function submitItem() {
@@ -43,7 +47,7 @@ function getTasksOnServer() {
         let tasks = response
         for (let task of tasks) {
             if (task.task_completed) {
-               $('#table-body').append(`<tr>
+               $('#table-body').append(`<tr class="tastTableRow">
                                         <td>${task.todo_item}</td>
                                         <td>${task.task_completed}</td>
                                         <td><div></div></td>
@@ -53,7 +57,7 @@ function getTasksOnServer() {
                 $('#table-body').append(`<tr>
                                         <td>${task.todo_item}</td>
                                         <td>${task.task_completed}</td>
-                                        <td><button class="complete-btn">Completed</button></td>
+                                        <td><button class="complete-btn" data-updateid="${task.id}">Completed</button></td>
                                         <td><button class="delete-btn" data-deleteid="${task.id}">Delete</button></td>
                                     </tr>`)
             }
@@ -75,4 +79,19 @@ function deleteTask() {
         getTasksOnServer();
     })
     
+}
+
+// Sets tast completed to true
+function updateTask() {
+    const updateId = $(this).data('updateid');
+    
+    
+console.log(updateId);
+
+    $.ajax({
+        method: 'PUT',
+        url: `/task/update/${updateId}`
+    }).then((response) => {
+        getTasksOnServer();
+    })
 }
